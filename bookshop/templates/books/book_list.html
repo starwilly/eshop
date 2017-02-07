@@ -4,7 +4,7 @@
 
   <div class="row">
 
-    <div class="col-xs-3 col-lg-2 hidden-xs">
+    <div class="col-sm-3 col-lg-2 hidden-xs">
       <!-- category list -->
       <div class="list-group sidebar-category">
         {% for category in view.categories %}
@@ -63,25 +63,23 @@
 
       {% if is_paginated %}
         <!-- pagination -->
-        <div class="pagination">
-        <span class="step-links">
+        <nav>
+          <ul class="pager">
+            {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}"><span aria-hidden="true">&larr;</span> 上一頁</a></li>
+            {% else %}
+              <li class="disabled"><a href="#"><span aria-hidden="true">&larr;</span> 上一頁</a></li>
+            {% endif %}
 
-          {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-          {% endif %}
+            <li> {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</li>
 
-          <span class="current">
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-          </span>
-
-          {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-          {% endif %}
-
-        </span>
-
-        </div>
-
+            {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}">下一頁<span aria-hidden="true">&rarr;</span></a></li>
+            {% else %}
+              <li class="disabled"><a href="#">下一頁<span aria-hidden="true">&rarr;</span></a></li>
+            {% endif %}
+          </ul>
+        </nav>
       {% endif %}
     </div>
   </div>

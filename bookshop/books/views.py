@@ -5,7 +5,7 @@ from books.models import Book, Category
 class BooksListView(ListView):
     model = Book
 
-    paginate_by = 10
+    paginate_by = 12
 
     def categories(self):
         return Category.objects.all()
